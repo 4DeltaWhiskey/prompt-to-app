@@ -1,8 +1,6 @@
-import React from 'react'
+Copyimport React from 'react'
 import { Line } from 'react-chartjs-2'
-import { Chart, LineController, LineElement, PointElement, LinearScale, Title } from 'chart.js/auto'
-
-Chart.register(LineController, LineElement, PointElement, LinearScale, Title)
+import 'chart.js/auto'
 
 function ForecastChart() {
   const data = {
