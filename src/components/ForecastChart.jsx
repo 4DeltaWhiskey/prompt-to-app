@@ -27,7 +27,64 @@ function ForecastChart() {
   }
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+    <div className="bg-white shadow-md rounded-lg p-6 mb-8">import React from 'react'
+import { Line } from 'react-chartjs-2'
+import 'chart.js/auto'
+
+const ForecastChart = ({ forecastData }) => {
+  // Prepare data for the chart
+  const data = {
+    labels: forecastData.map(entry => entry.date),
+    datasets: [
+      {
+        label: 'Forecasted Hours',
+        data: forecastData.map(entry => entry.hours),
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        fill: true,
+      }
+    ]
+  }
+
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Hours'
+        }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Date'
+        }
+      }
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Time Forecast'
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return `${context.parsed.y} hours`
+          }
+        }
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false
+  }
+
+  return (
+    <div style={{ height: '400px' }}>
+      <Line data={data} options={options} />
+    </div>
+  )
+}
       <Line data={data} options={options} />
     </div>
   )
